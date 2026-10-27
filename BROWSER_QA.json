@@ -1,0 +1,16 @@
+{
+  "status": "not_run",
+  "browser_provider_available": false,
+  "desktop_approval": "timed_out",
+  "reason": "CUA reported no browsers; createBrowserTab(iab) returned Browser is not available. Launching installed Chrome through Computer Use ended with app approval timed out.",
+  "responsive_cases_planned": 36,
+  "responsive_cases_executed": 0,
+  "visual_verification": false,
+  "clipboard_permission_verified": false,
+  "fallback_checks": {
+    "static_pages": 6504,
+    "link_and_asset_references": 189720,
+    "search_core_test_groups": 4
+  },
+  "scope": "No real-browser rendering, responsive layout or clipboard success is claimed. The prepared harness remains available for a later browser session."
+}

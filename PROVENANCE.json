@@ -1,0 +1,10 @@
+{
+ "project":"NaNa Lab DLL Directory",
+ "dataType":"Factual DLL names, versions, architecture, package membership and official links",
+ "officialSources":["https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json","https://dotnet.microsoft.com/en-us/download/dotnet","https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist/","https://www.microsoft.com/en-us/download/details.aspx?id=8109","https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads","https://www.nuget.org/"],
+ "packageIdentity":"NuGet entries are limited to Microsoft-owned, verified-prefix packages with official documentation provenance. Third-party files are excluded.",
+ "materialCopied":"No DLL or installer binaries. No copied documentation paragraphs. Only factual package metadata and links.",
+ "design":"Original HTML, CSS and SVG; system fonts, no font redistribution.",
+ "publisherScripts":"Existing NaNa Lab publisher integrations loaded from the providers' own endpoints.",
+ "notAffiliated":"Independently operated; not endorsed or operated by Microsoft."
+}

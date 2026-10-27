@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-26T22:38:17.122Z",
+  "pass": true,
+  "scope": "Final merged catalog audit only. Previous independent raw ZIP/CAB/MSI membership checks reused after confirming source hashes. HTML page generation, browser behavior, publication and live download link liveness are outside this audit.",
+  "catalog": {
+    "file": "sites/dll-directory/src/catalog.json",
+    "sha256": "e42952744695eb9f1934ca7f12b81745f5a94c417dcc14fbb524a754bb1aedbd"
+  },
+  "mergeScript": {
+    "file": "sites/dll-directory/scripts/merge-sources.py",
+    "sha256": "5bc60a94ff94bb7f94343a1307255d67006257794d67a940019d30e2e42f5471",
+    "review": "Read directly. Uses source inventories only, filters marshal.dll and reference mappings, validates official URLs, keeps SDK/runtime separate and projects metadata without copying binaries."
+  },
+  "sourceInputs": [
+    {
+      "group": "dotnet",
+      "file": "dll-portal-research/dotnet/entries.json",
+      "rows": 720,
+      "sha256": "12bda9ebd663d9e660a2d67347029c8df2b8ccca72c7b66b0650f1137405954e",
+      "catalogSourceHashMatches": true,
+      "priorRawAuditHashMatches": true
+    },
+    {
+      "group": "legacy",
+      "file": "dll-portal-research/legacy/entries.json",
+      "rows": 227,
+      "sha256": "b5cb08e2d7fe3493810df6c18c6aa1636365a4edb0457a90f1cbcf6e48266bb3",
+      "catalogSourceHashMatches": true,
+      "priorRawAuditHashMatches": true
+    },
+    {
+      "group": "packages",
+      "file": "dll-portal-research/packages/entries.json",
+      "rows": 137,
+      "sha256": "0986adaa0501f2fc9934c2b98e9cfd73d2590fb966be10655bb495bbcc20e839",
+      "catalogSourceHashMatches": true,
+      "priorRawAuditHashMatches": true
+    }
+  ],
+  "priorEvidenceFiles": {
+    "checked": 44,
+    "unchanged": 44,
+    "changed": []
+  },
+  "checks": {
+    "sourceEntries": 1084,
+    "sourceMappings": 5133,
+    "expectedFilenameCount": 1083,
+    "actualFilenameCount": 1083,
+    "catalogDeclaredCount": 1083,
+    "expectedMappingCount": 5121,
+    "actualMappingCount": 5121,
+    "marshalNames": 0,
+    "marshalMappingsExcluded": 8,
+    "referenceMappingsRemaining": 0,
+    "referenceMappingsExcluded": 4,
+    "totalMappingsExcluded": 12,
+    "allRetainedFieldsAndKindsMatchSources": true,
+    "previousRawEvidenceReused": true,
+    "previousRawMemberMatches": 5133,
+    "mergedSummaryMatches": true,
+    "expectedCountsMatch": true
+  },
+  "exclusions": [
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.Runtime",
+      "architecture": "arm64",
+      "member": "tools/MSIX/win10-arm64/Microsoft.WindowsAppRuntime.2.msix!/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.Runtime",
+      "architecture": "arm64ec",
+      "member": "tools/MSIX/win10-arm64ec/Microsoft.WindowsAppRuntime.2.msix!/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.Runtime",
+      "architecture": "x64",
+      "member": "tools/MSIX/win10-x64/Microsoft.WindowsAppRuntime.2.msix!/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.Runtime",
+      "architecture": "x86",
+      "member": "tools/MSIX/win10-x86/Microsoft.WindowsAppRuntime.2.msix!/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.InteractiveExperiences",
+      "architecture": "arm64",
+      "member": "runtimes-framework/win-arm64/native/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.InteractiveExperiences",
+      "architecture": "arm64ec",
+      "member": "runtimes-framework/win-arm64ec/native/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.InteractiveExperiences",
+      "architecture": "x64",
+      "member": "runtimes-framework/win-x64/native/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "marshal.dll",
+      "packageId": "Microsoft.WindowsAppSDK.InteractiveExperiences",
+      "architecture": "x86",
+      "member": "runtimes-framework/win-x86/native/marshal.dll",
+      "reason": "uncertain-file-authorship"
+    },
+    {
+      "group": "packages",
+      "name": "microsoft.powershell.commands.management.dll",
+      "packageId": "Microsoft.PowerShell.SDK",
+      "architecture": "any",
+      "member": "ref/net10.0/Microsoft.PowerShell.Commands.Management.dll",
+      "reason": "reference-assembly"
+    },
+    {
+      "group": "packages",
+      "name": "microsoft.powershell.commands.utility.dll",
+      "packageId": "Microsoft.PowerShell.SDK",
+      "architecture": "any",
+      "member": "ref/net10.0/Microsoft.PowerShell.Commands.Utility.dll",
+      "reason": "reference-assembly"
+    },
+    {
+      "group": "packages",
+      "name": "microsoft.powershell.consolehost.dll",
+      "packageId": "Microsoft.PowerShell.SDK",
+      "architecture": "any",
+      "member": "ref/net10.0/Microsoft.PowerShell.ConsoleHost.dll",
+      "reason": "reference-assembly"
+    },
+    {
+      "group": "packages",
+      "name": "system.management.automation.dll",
+      "packageId": "Microsoft.PowerShell.SDK",
+      "architecture": "any",
+      "member": "ref/net10.0/System.Management.Automation.dll",
+      "reason": "reference-assembly"
+    }
+  ],
+  "errors": [],
+  "status": "passed-final-merged-catalog",
+  "previousAudit": "dll-portal-research/independent-audit.json",
+  "filesWritten": [
+    "dll-portal-research/final-merged-audit.json"
+  ],
+  "publicationContinuation": {
+    "date": "2026-10-27",
+    "scope": "Catalog and frozen inputs unchanged; original raw-package audit retained with its original date. Browser and public hosting checks are recorded separately.",
+    "catalogFile": "src/catalog.json",
+    "sourceInputsVerified": [
+      {
+        "group": "dotnet",
+        "sha256": "12bda9ebd663d9e660a2d67347029c8df2b8ccca72c7b66b0650f1137405954e",
+        "unchanged": true
+      },
+      {
+        "group": "legacy",
+        "sha256": "b5cb08e2d7fe3493810df6c18c6aa1636365a4edb0457a90f1cbcf6e48266bb3",
+        "unchanged": true
+      },
+      {
+        "group": "packages",
+        "sha256": "0986adaa0501f2fc9934c2b98e9cfd73d2590fb966be10655bb495bbcc20e839",
+        "unchanged": true
+      }
+    ],
+    "mergeHelperRelocation": "Only workspace-root resolution changed for the new standalone checkout."
+  }
+}

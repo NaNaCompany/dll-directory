@@ -1,0 +1,6 @@
+node_modules/
+artifacts/
+*.log
+.local/
+.openai/
+__pycache__/

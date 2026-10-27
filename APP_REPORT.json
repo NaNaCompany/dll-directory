@@ -1,0 +1,34 @@
+{
+  "slug": "dll-directory",
+  "title": "DLL 공식 다운로드 찾기",
+  "ready": true,
+  "languages": [
+    "ko",
+    "en",
+    "es",
+    "zh",
+    "ja",
+    "de"
+  ],
+  "dlls": 1083,
+  "runtimeNames": 676,
+  "sdkOnlyNames": 407,
+  "packageMappings": 5121,
+  "homePages": 6,
+  "downloadPages": 6498,
+  "staticPages": 6504,
+  "binariesHosted": 0,
+  "hosting": {
+    "provider": "GitHub Pages",
+    "url": "https://nanalab.kr/dll-directory/",
+    "repository": "https://github.com/NaNaCompany/dll-directory"
+  },
+  "verification": {
+    "sourceInventory": "Frozen catalog and three source input hashes match; original raw-package audit scope and dates retained.",
+    "coreTests": "4 search-core groups passed.",
+    "generatedPages": "6504 pages and 189720 link/asset references validated.",
+    "browserQA": "Not run: browser provider unavailable and desktop app approval timed out. See BROWSER_QA.json.",
+    "advertising": "Four publisher integrations present; actual ad delivery and analytics collection are separate."
+  },
+  "scope": "All six home languages and existing translated detail routes preserved. Previous private review site unchanged. Actual public deployment is verified separately against the pushed commit."
+}

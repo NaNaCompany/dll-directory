@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "dlls": 1083,
+  "runtime": 676,
+  "sdkOnly": 407,
+  "packageMappings": 5121,
+  "languages": 6,
+  "homePages": 6,
+  "downloadPages": 6498,
+  "pages": 6504,
+  "linksAndAssetsChecked": 189720,
+  "htmlBytes": 80469520,
+  "binariesHosted": 0,
+  "catalogSha256": "e42952744695eb9f1934ca7f12b81745f5a94c417dcc14fbb524a754bb1aedbd",
+  "browserQA": "Separate responsive browser evidence is recorded in BROWSER_QA.json; this validator does not claim visual inspection."
+}
