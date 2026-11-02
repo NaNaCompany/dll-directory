@@ -1,3 +1,12 @@
+
+// Shared book banner adapter: campaign and appearance are maintained in src_cdn.
+function addSharedBookBanner(value) {
+  if (typeof value !== 'string' || !/^\s*(?:<!doctype\s+html|<html\b)/i.test(value) || value.includes('https://nanalab.kr/src_cdn/banner/astra.js')) return value;
+  const snippet = "<!-- NaNa shared book banner --><script defer src=\"https://nanalab.kr/src_cdn/banner/astra.js\"></script><!-- /NaNa shared book banner -->";
+  if (/<head\b[^>]*>/i.test(value)) return value.replace(/<head\b[^>]*>/i, opening => opening + snippet);
+  for (const closing of [/<\/body\s*>/i, /<\/html\s*>/i]) if (closing.test(value)) return value.replace(closing, () => snippet + value.match(closing)[0]);
+  return value + snippet;
+}
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -9,9 +18,9 @@ const locales=JSON.parse(fs.readFileSync(path.join(root,'src/locales.json'),'utf
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 fs.mkdirSync(path.join(out,'assets'),{recursive:true});
 for(const f of ['style.css','app.js','core.js'])fs.copyFileSync(path.join(root,'src',f),path.join(out,'assets',f));
-fs.writeFileSync(path.join(out,'assets/icon.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="18" fill="#14243b"/><path d="M23 18h24l12 12v32H23z" fill="none" stroke="#fff" stroke-width="3"/><path d="M47 18v14h12M29 42h23M29 50h17" fill="none" stroke="#fff" stroke-width="3"/></svg>');
+fs.writeFileSync(path.join(out,'assets/icon.svg'),addSharedBookBanner(('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="18" fill="#14243b"/><path d="M23 18h24l12 12v32H23z" fill="none" stroke="#fff" stroke-width="3"/><path d="M47 18v14h12M29 42h23M29 50h17" fill="none" stroke="#fff" stroke-width="3"/></svg>')));
 const languageNames={ko:'한국어',en:'English',es:'Español',zh:'中文',ja:'日本語',de:'Deutsch'};
-const relative=(lang,filename)=>{const depth=(lang==='ko'?0:1)+(filename?2:0);return depth?'../'.repeat(depth):'./';};
+const relative=(lang,filename)=>{const depth=(lang==='ko'?0:1)+(filename?2:0);return addSharedBookBanner((depth?'../'.repeat(depth):'./'));};
 const route=(lang,filename)=> (lang==='ko'?'':lang+'/')+(filename?'dll/'+filename+'/':'');
 const url=(lang,filename)=>cfg.origin.replace(/\/$/,'')+'/'+route(lang,filename);
 function shell(lang,filename,body){
@@ -21,7 +30,7 @@ function shell(lang,filename,body){
  const alternates=cfg.languages.map(l=>`<link rel="alternate" hreflang="${l}" href="${url(l,filename)}">`).join('')+`<link rel="alternate" hreflang="x-default" href="${url('ko',filename)}">`;
  let html=`<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#14243b"><meta name="robots" content="${cfg.public?'index,follow':'noindex,nofollow'}"><title>${esc(title)} · NaNa Lab</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${url(lang,filename)}">${alternates}<meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url(lang,filename)}"><link rel="icon" type="image/svg+xml" href="${prefix}assets/icon.svg"><link rel="stylesheet" href="${prefix}assets/style.css"></head><body><a class="skip" href="#main">${t.skip}</a><header class="topbar"><div class="shell"><a class="brand" href="${prefix+route(lang)}"><span class="brand-icon">.dll</span><strong>DLL DIRECTORY</strong></a><nav class="languages" aria-label="Language">${menu}</nav></div></header><main class="shell" id="main">${body}</main><footer class="footer"><div class="shell">© 2026 NaNa Lab</div></footer><a class="more-apps" href="https://nanalab.kr/apps/">More Apps</a><script id="page-ui" type="application/json">${JSON.stringify({count:t.count,copied:t.copied,copyFail:t.copyFail}).replaceAll('<','\\u003c')}</script><script type="module" src="${prefix}assets/app.js"></script></body></html>`;
  html=completeTracking(html).split(/\r?\n/).map(x=>x.replace(/[\t ]+$/,'')).join('\n').trimEnd()+'\n';
- const file=path.join(out,route(lang,filename),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,html);
+ const file=path.join(out,route(lang,filename),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,addSharedBookBanner((html)));
 }
 for(const lang of cfg.languages){
  const t=locales[lang],date=new Intl.DateTimeFormat(lang,{dateStyle:'medium',timeZone:'Asia/Seoul'}).format(new Date(catalog.checkedAt));
@@ -37,11 +46,11 @@ for(const lang of cfg.languages){
 const sitemapEntries=cfg.languages.flatMap(lang=>[null,...catalog.files].map(file=>{
  const filename=file?.slug;
  const links=cfg.languages.map(l=>'<xhtml:link rel="alternate" hreflang="'+l+'" href="'+esc(url(l,filename))+'"/>').join('')+'<xhtml:link rel="alternate" hreflang="x-default" href="'+esc(url('ko',filename))+'"/>';
- return {url:url(lang,filename),xml:'<url><loc>'+esc(url(lang,filename))+'</loc>'+links+'</url>'};
+ return addSharedBookBanner(({url:url(lang,filename),xml:'<url><loc>'+esc(url(lang,filename))+'</loc>'+links+'</url>'}));
 }));
 const urls=sitemapEntries.map(entry=>entry.url);
-fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'+sitemapEntries.map(entry=>entry.xml).join('')+'</urlset>\n');
-fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\n${cfg.public?'Allow: /':'Disallow: /'}\nSitemap: ${cfg.origin}/sitemap.xml\n`);
-fs.writeFileSync(path.join(out,'.nojekyll'),'');
-fs.writeFileSync(path.join(root,'BUILD.json'),JSON.stringify({builtAt:new Date().toISOString(),files:catalog.count,languages:cfg.languages,homePages:cfg.languages.length,downloadPages:cfg.languages.length*catalog.count,pages:urls.length,public:cfg.public,origin:cfg.origin,binariesHosted:0},null,2)+'\n');
+fs.writeFileSync(path.join(out,'sitemap.xml'),addSharedBookBanner(('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'+sitemapEntries.map(entry=>entry.xml).join('')+'</urlset>\n')));
+fs.writeFileSync(path.join(out,'robots.txt'),addSharedBookBanner((`User-agent: *\n${cfg.public?'Allow: /':'Disallow: /'}\nSitemap: ${cfg.origin}/sitemap.xml\n`)));
+fs.writeFileSync(path.join(out,'.nojekyll'),addSharedBookBanner(('')));
+fs.writeFileSync(path.join(root,'BUILD.json'),addSharedBookBanner((JSON.stringify({builtAt:new Date().toISOString(),files:catalog.count,languages:cfg.languages,homePages:cfg.languages.length,downloadPages:cfg.languages.length*catalog.count,pages:urls.length,public:cfg.public,origin:cfg.origin,binariesHosted:0},null,2)+'\n')));
 console.log(JSON.stringify({dlls:catalog.count,pages:urls.length,languages:cfg.languages.length}));

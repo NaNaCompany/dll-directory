@@ -19,3 +19,10 @@
 - 6개 메인: `/`, `/en/`, `/es/`, `/zh/`, `/ja/`, `/de/`.
 - 각 메인의 `dll/<파일명>/` 상세 경로와 같은 DLL의 6개 언어 이동을 유지한다.
 - 최종 배포 커밋·GitHub Actions·Pages 배포 및 공개 대표 페이지 대조 결과는 워크스페이스의 배포 증거와 `UpdateQue.md`에 기록한다. 공개 목록에는 한국어 대표 카드 1개, 루트 sitemapindex에는 위 사이트맵 1개 연결 대상으로 정리한다.
+
+## 2026-11-02 — Shared book banner
+
+- Connected all public page types to `https://nanalab.kr/src_cdn/banner/astra.js`. Campaign, design, translated controls and the supplied YES24 book destination are maintained centrally in src_cdn.
+- Shared archive assets load the banner on detail/list pages; other HTML and source templates include the stable deferred loader. HTML-only generator adapters retain the connection after rebuilds and pass non-HTML values through unchanged.
+- The component is closable for the tab session, clears detected bottom navigation, and hides for modals/fullscreen/mobile input. The Astra practice site remains excluded. No additional analytics or ad-network requests are introduced by the component.
+- Existing content, routes and publisher integrations are preserved. Direct HTML changes restore exactly to the baseline when the marked loader is removed. Workspace validation/deployment evidence: `.tools/shared-book-banner-20261102/`.
